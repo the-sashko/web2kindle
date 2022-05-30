@@ -1,0 +1,5 @@
+{
+  "project_name": "web2kindle",
+  "email": "<YOUR_SEND_TO_KINDLE_EMAIL>",
+  "test_url": "https://en.wikipedia.org/wiki/Amazon_Kindle"
+}
