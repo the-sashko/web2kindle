@@ -1,0 +1,5 @@
+bin
+logs
+tmp
+config/config.json
+config/credentials.json
