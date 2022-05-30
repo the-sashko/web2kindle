@@ -73,8 +73,6 @@ func LogError(errorType string, errorEntity error, isExit bool) {
 
 	telegram.SendError(errorMessage)
 
-	fmt.Println(errorMessage)
-
 	if isExit {
 		os.Exit(0)
 	}

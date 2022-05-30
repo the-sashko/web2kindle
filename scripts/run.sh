@@ -18,7 +18,7 @@ done
 if [ $helpFlag == 1 ]; then
   echo "Usage: run.sh [options]"
   echo "Options:"
-  echo "    -m    set running mode: test or default"
+  echo "    -m    set running mode: default, test or loop"
   echo "    -h    show this help message and exit"
   exit 1
 fi

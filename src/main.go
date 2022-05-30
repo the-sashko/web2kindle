@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"net/url"
+	"time"
 	"web2kindle/config"
 	"web2kindle/logger"
 	"web2kindle/parser"
@@ -16,6 +17,7 @@ import (
 
 const (
 	runModeDefault = "default"
+	runModeLoop    = "loop"
 	runModeTest    = "test"
 )
 
@@ -28,10 +30,6 @@ func main() {
 
 	logger.LogMessage(fmt.Sprintf("run mode: %s", runMode), "app")
 
-	if runMode == runModeTest {
-		doHandleUrl(getTestUrl())
-	}
-
 	if runMode == runModeDefault {
 		logger.LogMessage("start retrieving new messages from telegram", "app")
 
@@ -43,6 +41,22 @@ func main() {
 			}
 
 			doHandleUrl(*urlPointer)
+		}
+	}
+
+	if runMode == runModeTest {
+		doHandleUrl(getTestUrl())
+	}
+
+	if runMode == runModeLoop {
+		for {
+			urlPointer = getUrlFromTelegram()
+
+			if urlPointer != nil {
+				doHandleUrl(*urlPointer)
+			}
+
+			time.Sleep(1 * time.Second)
 		}
 	}
 
@@ -80,13 +94,15 @@ func getParserEntityByUrl(url string) parser.EntityType {
 func getRumMode() string {
 	var runMode string
 
-	flag.StringVar(&runMode, "mode", runModeDefault, "running mode")
+	flag.StringVar(&runMode, "mode", runModeLoop, "running mode")
 
 	flag.Parse()
 
 	switch runMode {
 	case runModeDefault:
 		runMode = runModeDefault
+	case runModeLoop:
+		runMode = runModeLoop
 	case runModeTest:
 		runMode = runModeTest
 	default:

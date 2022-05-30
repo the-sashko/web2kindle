@@ -26,3 +26,8 @@ type apiResponse struct {
 	Result           []apiUpdate `json:"result"`
 	ErrorDescription string      `json:"description"`
 }
+
+type apiSendResponse struct {
+	Status           bool   `json:"ok"`
+	ErrorDescription string `json:"description"`
+}

@@ -81,7 +81,7 @@ func saveLastUpdateId(lastUpdateId int) {
 }
 
 func sendToTelegramAPI(text string, chatID int, token string) {
-	var response apiResponse
+	var response apiSendResponse
 
 	text = url.QueryEscape(text)
 
@@ -103,7 +103,7 @@ func getFromTelegramAPI(chatID int, token string, lastUpdateId int) *string {
 
 	apiUrl := getApiUrlForRetrieving(token, lastUpdateId)
 
-	response = sendToRemote(apiUrl)
+	response = getFromRemote(apiUrl)
 
 	if len(response.ErrorDescription) < 1 {
 		response.ErrorDescription = "unknown telegram api error"
@@ -148,7 +148,39 @@ func getApiUrlForRetrieving(token string, lastUpdateId int) string {
 	return fmt.Sprintf(apiRetrievingUrlPattern, token, offset)
 }
 
-func sendToRemote(url string) apiResponse {
+func sendToRemote(url string) apiSendResponse {
+	var response apiSendResponse
+
+	remoteResponse, err := http.Get(url)
+
+	if err != nil {
+		doError(err)
+	}
+
+	if remoteResponse.StatusCode != httpStatusOk {
+		doError(fmt.Errorf("HTTP Response Code %d", remoteResponse.StatusCode))
+	}
+
+	jsonDecoder := json.NewDecoder(remoteResponse.Body)
+
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+
+		if err != nil {
+			doError(err)
+		}
+	}(remoteResponse.Body)
+
+	err = jsonDecoder.Decode(&response)
+
+	if err != nil {
+		doError(err)
+	}
+
+	return response
+}
+
+func getFromRemote(url string) apiResponse {
 	var response apiResponse
 
 	remoteResponse, err := http.Get(url)
