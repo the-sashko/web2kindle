@@ -20,6 +20,8 @@ RUN mkdir /storage
 
 RUN git clone https://github.com/the-sashko/web2kindle.git /storage/web2kindle
 
+RUN cd /storage/web2kindle && git checkout -f tag v1.0.0 && git pull origin v1.0.0
+
 RUN ./storage/web2kindle/scripts/install.sh
 
 EXPOSE 80
