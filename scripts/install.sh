@@ -17,11 +17,11 @@ chmod -R 755 tmp
 touch tmp/telegram_last_update_id.txt
 chmod -R 755 tmp/telegram_last_update_id.txt
 
-cp confg/config_sample.json confg/config.json
-chmod 755 confg/config.json
+cp config/config_sample.json config/config.json
+chmod 755 config/config.json
 
-cp confg/credentials_sample.json confg/credentials.json
-chmod 755 confg/credentials.json
+cp config/credentials_sample.json config/credentials.json
+chmod 755 config/credentials.json
 
 cd "$scriptDir" || exit 1
 
