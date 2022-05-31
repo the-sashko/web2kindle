@@ -40,7 +40,7 @@ This application converts a web page text content into a .mobi e-book and send i
 
 #### Run with docker container
 
-1. `docker up web2kindle`
+1. `docker container start web2kindle`
 
 #### Run without docker
 
