@@ -9,7 +9,7 @@ sudo docker pull iamsashko/web2kindle
 
 sudo docker rm web2kindle &> /dev/null
 
-sudo docker run --restart always -d -p 80:80 --name web2kindle \
+sudo docker run --security-opt seccomp=unconfined --restart always --name web2kindle \
   -v "$scriptDir/../../tmp":/storage/web2kindle/tmp \
   -v "$scriptDir/../../config":/storage/web2kindle/config \
   -v "$scriptDir/../../logs":/storage/web2kindle/logs \
