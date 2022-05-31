@@ -20,14 +20,22 @@ RUN mkdir /storage
 
 RUN git clone https://github.com/the-sashko/web2kindle.git /storage/web2kindle
 
-RUN cd /storage/web2kindle && git checkout -f master && git pull origin master && /bin/bash /storage/web2kindle/scripts/install.sh
+RUN cd /storage/web2kindle && git checkout -f master && git pull origin master
+
+RUN mkdir /storage/web2kindle/bin
+
+RUN chmod -R 775 /storage/web2kindle/bin
+
+RUN cd /storage/web2kindle/src && go build -o /storage/web2kindle/bin/app
+
+RUN chmod -x /storage/web2kindle/bin/app
+
+RUN chmod 775 /storage/web2kindle/bin/app
 
 RUN rm -rf /storage/web2kindle/config
 
 RUN rm -rf /storage/web2kindle/tmp
 
 EXPOSE 80
-
-RUN ls -a /storage/web2kindle/scripts
 
 CMD ["./storage/web2kindle/scripts/deamon.sh"]
