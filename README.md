@@ -22,10 +22,8 @@ This application converts a web page text content into a .mobi e-book and send i
 
 1. `git clone https://github.com/the-sashko/web2kindle.git web2kindle`
 2. `cd web2kindle`
-3. `cd config`
-4. `cp config_sample.json config.json`
-5. `cp credentials_sample.json credentials.json`
-6. Set up your data in config.json and credentials.json files. If you have no additional Telegram bot for logs, you must use credentials of your main Telegram bot instead credentials of Telegram bot for logs
+2. `./scripts/docker/run.sh`
+6. Set up your data in `config/config.json` and `config/credentials.json` files. If you have no additional Telegram bot for logs, you must use credentials of your main Telegram bot instead credentials of Telegram bot for logs
 
 #### Install with docker
 
