@@ -20,7 +20,7 @@ RUN mkdir /storage
 
 RUN git clone https://github.com/the-sashko/web2kindle.git /storage/web2kindle
 
-RUN cd /storage/web2kindle && git checkout -f master && git pull origin master
+RUN cd /storage/web2kindle && git pull origin master
 
 RUN ./storage/web2kindle/scripts/install.sh
 
