@@ -34,8 +34,6 @@ RUN chmod 775 /storage/web2kindle/bin/app
 
 RUN rm -rf /storage/web2kindle/config
 
-RUN rm -rf /storage/web2kindle/tmp
-
 EXPOSE 80
 
 CMD ["./storage/web2kindle/scripts/deamon.sh"]
