@@ -7,7 +7,7 @@ cd "$scriptDir/../.." || exit 1
 
 sudo docker pull iamsashko/web2kindle
 
-sudo docker rm web2kindle
+sudo docker rm web2kindle &> /dev/null
 
 sudo docker run -d -p 80:80 --name web2kindle \
   -v "$scriptDir/../../tmp":/storage/web2kindle/tmp \
